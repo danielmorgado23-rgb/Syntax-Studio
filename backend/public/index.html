@@ -1,0 +1,541 @@
+<!-- ========================= index.html ========================= -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+
+<title>Syntax Studio | Desarrollo de Software</title>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+html{
+  scroll-behavior:smooth;
+}
+
+.fade-up{
+  animation:fadeUp 1s ease;
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.slide{
+  width:100%;
+  flex-shrink:0;
+  height:350px;
+  object-fit:cover;
+  cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body class="bg-gray-950 text-white">
+
+<!-- ================= HERO ================= -->
+
+<section
+class="relative min-h-screen w-full bg-cover bg-center flex flex-col items-center justify-center px-4"
+style="background-image:url('https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1600&auto=format&fit=crop');">
+
+<div class="absolute inset-0 bg-black/70"></div>
+
+<div class="relative text-center fade-up">
+
+<h1
+class="text-4xl sm:text-5xl md:text-7xl font-extrabold">
+
+Syntax Studio 🚀
+
+</h1>
+
+<p
+class="mt-6 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
+
+Desarrollo de aplicaciones móviles, páginas web modernas
+y software profesional en C# y .NET.
+
+</p>
+
+<div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+
+<a href="cotizacion.html"
+class="bg-blue-600 hover:bg-blue-700 transition px-8 py-3 rounded-xl text-lg shadow-lg">
+
+Solicitar Proyecto
+
+</a>
+
+<a href="#servicios"
+class="border border-white hover:bg-white hover:text-black transition px-8 py-3 rounded-xl text-lg">
+
+Ver Servicios
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= SOBRE NOSOTROS ================= -->
+
+<!-- ================= HERO PRO ================= -->
+
+<section
+class="relative min-h-screen flex items-center justify-center overflow-hidden bg-black text-white">
+
+<!-- FONDO GRADIENTE -->
+
+<div
+class="absolute inset-0 bg-gradient-to-br from-blue-900 via-black to-purple-900">
+</div>
+
+<!-- EFECTO BLUR -->
+
+<div
+class="absolute top-20 left-20 w-72 h-72 bg-blue-500 rounded-full blur-3xl opacity-20 animate-pulse">
+</div>
+
+<div
+class="absolute bottom-20 right-20 w-72 h-72 bg-purple-500 rounded-full blur-3xl opacity-20 animate-pulse">
+</div>
+
+<!-- CONTENIDO -->
+
+<div
+class="relative z-10 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+
+<!-- TEXTO -->
+
+<div>
+
+<span
+class="bg-blue-500/20 text-blue-300 px-4 py-2 rounded-full text-sm border border-blue-500/30">
+
+🚀 Desarrollo Web & Apps
+
+</span>
+
+<h1
+class="text-5xl md:text-7xl font-extrabold leading-tight mt-6">
+
+Creamos
+<span class="text-blue-400">
+soluciones digitales
+</span>
+
+modernas
+
+</h1>
+
+<p
+class="text-gray-300 text-lg mt-6 leading-relaxed">
+
+Desarrollamos páginas web,
+aplicaciones móviles y software profesional
+para negocios, empresas y emprendedores.
+
+</p>
+
+<!-- BOTONES -->
+
+<div class="flex flex-wrap gap-4 mt-8">
+
+<a href="cotizacion.html"
+class="bg-blue-600 hover:bg-blue-700 transition px-8 py-4 rounded-2xl font-bold shadow-2xl hover:scale-105">
+
+Solicitar Proyecto 🚀
+
+</a>
+
+<a href="#servicios"
+class="border border-gray-500 hover:border-blue-400 hover:text-blue-400 transition px-8 py-4 rounded-2xl font-bold">
+
+Ver Servicios
+
+</a>
+
+</div>
+
+<!-- STATS -->
+
+<div class="flex gap-8 mt-10 flex-wrap">
+
+<div>
+<h3 class="text-3xl font-bold text-blue-400">
++10
+</h3>
+<p class="text-gray-400">
+Proyectos
+</p>
+</div>
+
+<div>
+<h3 class="text-3xl font-bold text-purple-400">
+100%
+</h3>
+<p class="text-gray-400">
+Responsive
+</p>
+</div>
+
+<div>
+<h3 class="text-3xl font-bold text-green-400">
+24/7
+</h3>
+<p class="text-gray-400">
+Soporte
+</p>
+</div>
+
+</div>
+
+</div>
+
+<!-- IMAGEN -->
+
+<div class="relative flex justify-center">
+
+<div
+class="absolute w-80 h-80 bg-blue-500/30 rounded-full blur-3xl">
+</div>
+
+<img
+src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop"
+class="relative rounded-3xl shadow-2xl border border-white/10 hover:scale-105 transition duration-500">
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= SERVICIOS ================= -->
+
+<section
+id="servicios"
+class="py-20 bg-gray-900 fade-up">
+
+<h2 class="text-4xl font-bold text-center mb-14">
+
+Servicios
+
+</h2>
+
+<div class="grid md:grid-cols-3 gap-8 px-6 md:px-20">
+
+<div
+class="bg-gray-800 rounded-2xl p-8 shadow-xl hover:scale-105 transition">
+
+<div class="text-5xl mb-4">🌐</div>
+
+<h3 class="text-2xl font-bold mb-3">
+
+Desarrollo Web
+
+</h3>
+
+<p class="text-gray-300">
+
+Creamos páginas web modernas, rápidas y responsivas.
+
+</p>
+
+</div>
+
+<div
+class="bg-gray-800 rounded-2xl p-8 shadow-xl hover:scale-105 transition">
+
+<div class="text-5xl mb-4">📱</div>
+
+<h3 class="text-2xl font-bold mb-3">
+
+Apps Móviles
+
+</h3>
+
+<p class="text-gray-300">
+
+Aplicaciones Android funcionales y optimizadas utilizando Kotlin, Dart, Flutter y Android Studio.
+
+</p>
+
+</div>
+
+<div
+class="bg-gray-800 rounded-2xl p-8 shadow-xl hover:scale-105 transition">
+
+<div class="text-5xl mb-4">💻</div>
+
+<h3 class="text-2xl font-bold mb-3">
+
+Software en C#
+
+</h3>
+
+<p class="text-gray-300">
+
+Sistemas personalizados utilizando .NET y Visual Studio.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= GALERÍA ================= -->
+
+<section class="bg-gray-950 py-20 px-6 fade-up">
+
+<h2 class="text-4xl font-bold text-center mb-12">
+
+Proyectos y Tecnologías
+
+</h2>
+
+<div
+class="relative max-w-5xl mx-auto overflow-hidden rounded-2xl shadow-2xl">
+
+<div
+id="carousel"
+class="flex transition-transform duration-500 ease-in-out">
+
+<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop"
+class="slide">
+
+<img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop"
+class="slide">
+
+<img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop"
+class="slide">
+
+<img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=1200&auto=format&fit=crop"
+class="slide">
+
+</div>
+
+<button onclick="prevSlide()"
+class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/70 px-3 py-2 rounded-full">
+
+❮
+
+</button>
+
+<button onclick="nextSlide()"
+class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/70 px-3 py-2 rounded-full">
+
+❯
+
+</button>
+
+<div
+id="dots"
+class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= CONTACTO ================= -->
+
+<section
+class="py-20 px-6 max-w-4xl mx-auto fade-up">
+
+<h2 class="text-4xl font-bold text-center mb-12">
+
+Contacto
+
+</h2>
+
+<div
+class="bg-gray-900 rounded-2xl shadow-2xl p-10 text-center">
+
+<p class="text-lg text-gray-300 mb-6">
+
+¿Tienes una idea o proyecto?
+Contáctanos y te ayudamos a hacerlo realidad 🚀
+
+</p>
+
+<p class="mb-3">
+📱 <strong>775-760-62-26</strong>
+</p>
+
+<p class="mb-6">
+📧 <strong>syntaxstudio@gmail.com</strong>
+</p>
+
+<div class="flex justify-center gap-8 text-4xl">
+
+<a href="https://wa.me/527757606226"
+class="text-green-500 hover:scale-110 transition">
+
+<i class="fa-brands fa-whatsapp"></i>
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= FOOTER ================= -->
+
+<footer
+class="bg-black py-6 text-center text-gray-400">
+
+© 2026 Syntax Studio | Desarrollo de Software
+
+</footer>
+
+<!-- ================= MODAL ================= -->
+
+<div
+id="modal"
+class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50">
+
+<img
+id="modalImg"
+class="max-w-full max-h-full rounded-xl">
+
+</div>
+
+<!-- ================= SCRIPT ================= -->
+
+<script>
+
+const slides =
+  document.querySelectorAll(".slide");
+
+const carousel =
+  document.getElementById("carousel");
+
+const dotsContainer =
+  document.getElementById("dots");
+
+let index = 0;
+
+/* ===== DOTS ===== */
+
+slides.forEach((_, i) => {
+
+  const dot =
+    document.createElement("div");
+
+  dot.className =
+    "w-3 h-3 rounded-full bg-gray-400 cursor-pointer";
+
+  dot.onclick = () => goToSlide(i);
+
+  dotsContainer.appendChild(dot);
+
+});
+
+function updateCarousel() {
+
+  carousel.style.transform =
+    `translateX(-${index * 100}%)`;
+
+  document.querySelectorAll("#dots div")
+    .forEach((d, i) => {
+
+      d.className =
+        i === index
+        ? "w-3 h-3 bg-blue-500 rounded-full"
+        : "w-3 h-3 bg-gray-400 rounded-full";
+
+    });
+
+}
+
+function nextSlide() {
+
+  index =
+    (index + 1) % slides.length;
+
+  updateCarousel();
+
+}
+
+function prevSlide() {
+
+  index =
+    (index - 1 + slides.length) % slides.length;
+
+  updateCarousel();
+
+}
+
+function goToSlide(i) {
+
+  index = i;
+
+  updateCarousel();
+
+}
+
+setInterval(nextSlide, 4000);
+
+updateCarousel();
+
+/* ===== MODAL ===== */
+
+const modal =
+  document.getElementById("modal");
+
+const modalImg =
+  document.getElementById("modalImg");
+
+slides.forEach(img => {
+
+  img.addEventListener("click", () => {
+
+    modal.classList.remove("hidden");
+
+    modal.classList.add("flex");
+
+    modalImg.src = img.src;
+
+  });
+
+});
+
+modal.addEventListener("click", () => {
+
+  modal.classList.add("hidden");
+
+});
+
+</script>
+
+</body>
+</html>
+
+

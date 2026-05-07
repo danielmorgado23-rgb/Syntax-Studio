@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Solicitar Proyecto | Syntax Studio</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-950 text-white">
+
+<!-- NAVBAR -->
+
+<header class="bg-black p-6 shadow-lg">
+
+<div class="container mx-auto flex justify-between items-center">
+
+<h1 class="text-2xl font-bold">
+Solicitar Proyecto 🚀
+</h1>
+
+<nav>
+<a href="index.html"
+class="hover:text-blue-400 transition">
+
+Inicio
+
+</a>
+</nav>
+
+</div>
+
+</header>
+
+<!-- FORM -->
+
+<section class="py-16 px-4">
+
+<div
+class="max-w-2xl mx-auto bg-gray-900 p-8 rounded-2xl shadow-2xl">
+
+<h2
+class="text-3xl font-bold text-center mb-8">
+
+Formulario de Proyecto
+
+</h2>
+
+<form id="formCotizacion" class="space-y-5">
+
+<div>
+
+<label class="block mb-2">
+Nombre completo
+</label>
+
+<input
+type="text"
+name="nombre"
+required
+class="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:border-blue-500">
+
+</div>
+
+<div>
+
+<label class="block mb-2">
+Teléfono o WhatsApp
+</label>
+
+<input
+type="tel"
+name="telefono"
+required
+maxlength="10"
+placeholder="7751234567"
+class="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:border-blue-500">
+
+</div>
+
+<div>
+
+<label class="block mb-2">
+Tipo de Proyecto
+</label>
+
+<select
+name="tipoProyecto"
+class="w-full p-3 rounded-lg bg-gray-800 border border-gray-700">
+
+<option value="pagina_web">
+Página Web
+</option>
+
+<option value="app_movil">
+Aplicación Móvil
+</option>
+
+<option value="software_escritorio">
+Software de Escritorio
+</option>
+
+<option value="base_datos">
+Base de Datos
+</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label class="block mb-2">
+Describe tu proyecto
+</label>
+
+<textarea
+name="descripcion"
+rows="5"
+required
+class="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:border-blue-500"></textarea>
+
+</div>
+
+<button
+type="submit"
+class="w-full bg-blue-600 hover:bg-blue-700 transition py-3 rounded-xl font-bold text-lg">
+
+Enviar Solicitud 🚀
+
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+<footer
+class="bg-black py-6 text-center text-gray-400">
+
+© 2026 Syntax Studio. Todos los derechos reservados.
+
+</footer>
+
+<script>
+
+const API = "http://localhost:5000";
+
+document
+.getElementById("formCotizacion")
+
+.addEventListener("submit", async e => {
+
+e.preventDefault();
+
+const nombre =
+e.target.nombre.value;
+
+const telefono =
+e.target.telefono.value;
+
+const descripcion =
+e.target.descripcion.value;
+
+const tipoProyecto =
+e.target.tipoProyecto.value;
+
+/* ===== FETCH ===== */
+
+const respuesta = await fetch(
+`${API}/api/cotizacion`,
+{
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+nombre,
+telefono,
+descripcion,
+tipoProyecto
+})
+
+});
+
+if(respuesta.ok){
+
+const mensaje = `Hola 🚀
+Quiero solicitar un proyecto.
+
+👤 Nombre: ${nombre}
+📱 Teléfono: ${telefono}
+💻 Proyecto: ${tipoProyecto}
+📝 Descripción: ${descripcion}`;
+
+const url =
+`https://wa.me/527757606226?text=${encodeURIComponent(mensaje)}`;
+
+window.open(url, "_blank");
+
+alert("Solicitud enviada correctamente");
+
+e.target.reset();
+
+}else{
+
+alert("Error al enviar");
+
+}
+
+});
+
+/* ===== SOLO NUMEROS ===== */
+
+document
+.querySelector('input[name="telefono"]')
+
+.addEventListener('input', function(){
+
+this.value =
+this.value.replace(/[^0-9]/g,'');
+
+});
+
+</script>
+
+</body>
+</html>

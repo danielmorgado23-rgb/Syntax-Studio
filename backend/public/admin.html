@@ -1,0 +1,249 @@
+<!-- ========================= admin.html ========================= -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel de Administración - Syntax Studio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    if (!localStorage.getItem("admin")) {
+      window.location.replace("/login.html");
+    }
+  </script>
+</head>
+
+<body class="bg-gray-100 p-2 md:p-6">
+
+<!-- NAVBAR -->
+<div class="flex justify-between items-center gap-4 p-4 bg-gray-900 rounded mb-6">
+  <h2 class="text-white font-semibold text-lg">Dashboard Admin 🚀</h2>
+
+  <button id="logoutBtn"
+    class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">
+    Cerrar sesión
+  </button>
+</div>
+
+<!-- STATS -->
+<div class="grid md:grid-cols-3 gap-4 mb-6">
+
+  <div class="bg-white rounded-xl shadow p-4 text-center">
+    <h3 class="text-gray-500">Solicitudes</h3>
+    <p id="totalSolicitudes" class="text-3xl font-bold">0</p>
+  </div>
+
+  <div class="bg-white rounded-xl shadow p-4 text-center">
+    <h3 class="text-gray-500">Pendientes</h3>
+    <p id="pendientes" class="text-3xl font-bold text-yellow-600">0</p>
+  </div>
+
+  <div class="bg-white rounded-xl shadow p-4 text-center">
+    <h3 class="text-gray-500">Aceptadas</h3>
+    <p id="aceptadas" class="text-3xl font-bold text-green-600">0</p>
+  </div>
+
+</div>
+
+<h1 class="text-2xl md:text-3xl font-bold mb-6 text-center">
+  Solicitudes de Proyectos
+</h1>
+
+<div class="overflow-x-auto">
+
+<table class="min-w-[900px] md:min-w-full bg-white rounded shadow">
+
+<thead class="bg-gray-900 text-white">
+<tr>
+  <th class="p-3">Nombre</th>
+  <th class="p-3">Teléfono</th>
+  <th class="p-3">Descripción</th>
+  <th class="p-3">Proyecto</th>
+  <th class="p-3">Estado</th>
+  <th class="p-3">Acciones</th>
+</tr>
+</thead>
+
+<tbody id="tablaCotizaciones"></tbody>
+
+</table>
+</div>
+
+<script>
+const API = "http://localhost:5000";
+
+/* ===== LOGOUT ===== */
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  localStorage.removeItem("admin");
+  window.location.href = "login.html";
+});
+
+/* ===== CARGAR ===== */
+async function cargarCotizaciones() {
+
+  const res = await fetch(`${API}/api/cotizaciones`);
+  const datos = await res.json();
+
+  document.getElementById("totalSolicitudes").innerText = datos.length;
+
+  document.getElementById("pendientes").innerText =
+    datos.filter(x => x.estado === "pendiente").length;
+
+  document.getElementById("aceptadas").innerText =
+    datos.filter(x => x.estado === "aceptada").length;
+
+  const tabla = document.getElementById("tablaCotizaciones");
+
+  tabla.innerHTML = "";
+
+  datos.forEach(c => {
+
+    tabla.innerHTML += `
+    <tr class="border-b text-center">
+
+      <td class="p-2">
+        <input value="${c.nombre}" id="nombre-${c._id}"
+          class="border p-1 rounded w-full">
+      </td>
+
+      <td class="p-2">
+        <input value="${c.telefono}" id="telefono-${c._id}"
+          class="border p-1 rounded w-full">
+      </td>
+
+      <td class="p-2">
+        <input value="${c.descripcion}" id="descripcion-${c._id}"
+          class="border p-1 rounded w-full">
+      </td>
+
+      <td class="p-2">
+        <input value="${c.tipoProyecto}" id="tipoProyecto-${c._id}"
+          class="border p-1 rounded w-full">
+      </td>
+
+      <td class="p-2">
+
+        <select onchange="cambiarEstado('${c._id}', this.value)"
+          class="border rounded p-1 w-full">
+
+          <option ${c.estado === "pendiente" ? "selected" : ""}>
+            pendiente
+          </option>
+
+          <option ${c.estado === "aceptada" ? "selected" : ""}>
+            aceptada
+          </option>
+
+          <option ${c.estado === "cancelada" ? "selected" : ""}>
+            cancelada
+          </option>
+
+        </select>
+
+      </td>
+
+      <td class="p-2">
+
+        <div class="flex flex-col md:flex-row justify-center gap-2">
+
+          <button onclick="guardarCambios('${c._id}')"
+            class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">
+
+            Guardar
+
+          </button>
+
+          <button onclick="eliminarCotizacion('${c._id}')"
+            class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition">
+
+            Eliminar
+
+          </button>
+
+        </div>
+
+      </td>
+
+    </tr>
+    `;
+  });
+}
+
+/* ===== ESTADO ===== */
+async function cambiarEstado(id, nuevoEstado) {
+
+  await fetch(`${API}/api/cotizacion/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      estado: nuevoEstado
+    })
+  });
+
+  cargarCotizaciones();
+}
+
+/* ===== GUARDAR ===== */
+async function guardarCambios(id) {
+
+  const nombre =
+    document.getElementById(`nombre-${id}`).value;
+
+  const telefono =
+    document.getElementById(`telefono-${id}`).value;
+
+  const descripcion =
+    document.getElementById(`descripcion-${id}`).value;
+
+  const tipoProyecto =
+    document.getElementById(`tipoProyecto-${id}`).value;
+
+  await fetch(`${API}/api/cotizacion/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      nombre,
+      telefono,
+      descripcion,
+      tipoProyecto
+    })
+  });
+
+  alert("Cambios guardados");
+
+  cargarCotizaciones();
+}
+
+/* ===== ELIMINAR ===== */
+async function eliminarCotizacion(id) {
+
+  const confirmar =
+    confirm("¿Eliminar solicitud?");
+
+  if (!confirmar) return;
+
+  const res = await fetch(`${API}/api/cotizacion/${id}`, {
+    method: "DELETE"
+  });
+
+  if (res.ok) {
+    alert("Eliminado");
+    cargarCotizaciones();
+  }
+}
+
+/* ===== INIT ===== */
+cargarCotizaciones();
+</script>
+
+</body>
+</html>
+
+
+
