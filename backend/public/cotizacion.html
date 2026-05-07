@@ -151,83 +151,124 @@ class="bg-black py-6 text-center text-gray-400">
 
 <script>
 
-const API = "http://localhost:5000";
+const API =
+"https://syntax-studio-backend.onrender.com";
+
+/* =========================
+   FORMULARIO
+========================= */
 
 document
-.getElementById("formCotizacion")
+.getElementById('formCotizacion')
 
-.addEventListener("submit", async e => {
+.addEventListener('submit', async e => {
 
 e.preventDefault();
 
 const nombre =
-e.target.nombre.value;
+e.target.nombre.value.trim();
 
 const telefono =
-e.target.telefono.value;
+e.target.telefono.value.trim();
 
 const descripcion =
-e.target.descripcion.value;
+e.target.descripcion.value.trim();
 
 const tipoProyecto =
 e.target.tipoProyecto.value;
 
-/* ===== FETCH ===== */
+const numeroWhatsApp =
+"527757606226";
+
+/* VALIDACIÓN */
+
+if (!nombre || !telefono || !descripcion) {
+
+alert("Completa todos los campos");
+
+return;
+
+}
+
+try {
 
 const respuesta = await fetch(
-`${API}/api/cotizacion`,
-{
-method:"POST",
 
-headers:{
-"Content-Type":"application/json"
+`${API}/api/cotizacion`,
+
+{
+method: 'POST',
+
+headers: {
+'Content-Type': 'application/json'
 },
 
-body:JSON.stringify({
+body: JSON.stringify({
+
 nombre,
 telefono,
 descripcion,
 tipoProyecto
+
 })
 
-});
+}
 
-if(respuesta.ok){
+);
 
-const mensaje = `Hola 🚀
-Quiero solicitar un proyecto.
+/* RESPUESTA */
 
-👤 Nombre: ${nombre}
-📱 Teléfono: ${telefono}
-💻 Proyecto: ${tipoProyecto}
-📝 Descripción: ${descripcion}`;
+if (respuesta.ok) {
 
-const url =
-`https://wa.me/527757606226?text=${encodeURIComponent(mensaje)}`;
+const mensaje =
+`🚀 *Nueva solicitud Syntax Studio* %0A%0A` +
 
-window.open(url, "_blank");
+`👤 *Nombre:* ${nombre} %0A` +
 
-alert("Solicitud enviada correctamente");
+`📱 *Teléfono:* ${telefono} %0A` +
+
+`💻 *Proyecto:* ${tipoProyecto} %0A` +
+
+`📝 *Descripción:* ${descripcion}`;
+
+const urlWhats =
+`https://wa.me/${numeroWhatsApp}?text=${mensaje}`;
+
+/* ABRIR WHATSAPP */
+
+window.location.href = urlWhats;
+
+/* LIMPIAR */
 
 e.target.reset();
 
-}else{
+} else {
 
-alert("Error al enviar");
+alert('Error al enviar solicitud');
+
+}
+
+} catch (error) {
+
+console.error(error);
+
+alert('Error de conexión con servidor');
 
 }
 
 });
 
-/* ===== SOLO NUMEROS ===== */
+/* =========================
+   SOLO NÚMEROS TELÉFONO
+========================= */
 
 document
 .querySelector('input[name="telefono"]')
 
-.addEventListener('input', function(){
+.addEventListener('input', function () {
 
 this.value =
-this.value.replace(/[^0-9]/g,'');
+this.value.replace(/[^0-9]/g, '');
 
 });
 
